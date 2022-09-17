@@ -1,0 +1,6 @@
+.checked-container{
+    background-color: green !important;
+}
+.checked-text{
+    text-decoration: line-through !important;
+}
