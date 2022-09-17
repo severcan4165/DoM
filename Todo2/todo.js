@@ -5,27 +5,7 @@ const container = document.getElementById("list-container")
 let deleteButton;
 
 
-const insertHtml = (todoItems)=>{
-    const todoDiv = document.createElement("div");
-    todoDiv.classList.add("todoitems");
 
-    const checkBox = document.createElement("input");
-    checkBox.type ="checkbox";
-    checkBox.id="checkbox";
-
-    const inputText = document.createElement("span");
-    inputText.id="todo-text";
-    inputText.textContent = todoItems.task;
-
-    const icon = document.createElement("i");
-    icon.className ="fa-solid fa-trash";
-    icon.id ="trash";
-
-    todoDiv.appendChild(checkBox);
-    todoDiv.appendChild(inputText);
-    todoDiv.appendChild(icon);
-    container.appendChild(todoDiv);
-}
 
 const startConfig = ()=> {
     const todoList = JSON.parse(localStorage.getItem("todoList"));
@@ -38,38 +18,75 @@ const startConfig = ()=> {
         });
         deleteButton = document.querySelectorAll("#trash");
       
+      
     }
 }
-startConfig();
 
-const addTodo = (e)=>{
-    e.preventDefault();
+
+const addTodo = ()=>{
+    // e.preventDefault();
     const taskContent = input.value;
+    // if (taskContent == '')  { // boş değer girilmeye çalışıyor ise hata veriyoruz
+    //     input.style.border = '1px solid tomato';
+    //     setTimeout(() => {
+    //        input.style.borderColor = 'transparent';
+    //     }, 2500);
+    //     return false;
+    //  }
     const todoItems = {
-        task : taskContent,
+        text : taskContent,
         isCompleted : false
     }
-    todoList = JSON.parse(localStorage.getItem("todoList"));
+
+    const todoList = JSON.parse(localStorage.getItem("todoList"));
     todoList.push(todoItems);
     localStorage.setItem("todoList", JSON.stringify(todoList));
 
 
     insertHtml(todoItems);
+    input.value = "";
 
 }
 
 const deleteItems = (e)=> {
-   const dele = e.target.parentElement;
-
-   const text = dele.lastChild.textContent;
+   const deleted = e.target.parentElement;
+   const text = deleted.children[1].textContent;
  
    let todoList = JSON.parse(localStorage.getItem("todoList"));
-   todoList = todoList.filter( (a) => a.text != text);
+   todoList = todoList.filter(td => td.text != text);
    localStorage.setItem("todoList", JSON.stringify(todoList));
-   dele.remove();
+
+   deleted.remove();
+//    localStorage.removeItem(`deleted`);
+    // window.onbeforeunload = function()
+    // {
+    //     localStorage.removeItem(deleted);
+    // };
   
    
 }
+const insertHtml = (todoItems)=>{
+    const todoDiv = document.createElement("div");
+    todoDiv.classList.add("todoitems");
+
+    const checkBox = document.createElement("input");
+    checkBox.type ="checkbox";
+    checkBox.id="checkbox";
+
+    const inputText = document.createElement("span");
+    inputText.id="todo-text";
+    inputText.textContent = todoItems.text;
+
+    const icon = document.createElement("i");
+    icon.className ="fa-solid fa-trash";
+    icon.id ="trash";
+
+    todoDiv.appendChild(checkBox);
+    todoDiv.appendChild(inputText);
+    todoDiv.appendChild(icon);
+    container.appendChild(todoDiv);
+}
+startConfig();
 addbutton.addEventListener("click",addTodo);
 deleteButton.forEach( (btn)=> btn.addEventListener("click",deleteItems));
 
