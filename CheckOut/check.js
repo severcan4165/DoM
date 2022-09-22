@@ -1,90 +1,106 @@
-const product = document.getElementById("imgs1");
-const product2 = document.getElementById("imgs2");
+
 const sectionR = document.querySelector(".right");
-const oranges = document.querySelector(".oranges");
-const del = document.querySelector(".del");
-const increase = document.querySelectorAll(".increase");
-const decrease = document.querySelectorAll(".decrease");
-const buttonspan = document.querySelector(".buttonspan");
-const subtotal = document.querySelector("#subTotal");
 
-const shipping = document.querySelector("#shipping");
-const total = document.querySelector("#total");
+const taxRate = 0.18;
+const shippingPrice = 15;
+const shippingFreePrice = 300;
 
-const bag = 54.99;
-const shoes = 75.99;
+window.addEventListener("load", () => {
+    calculateTotal();
+    //set items to LocalStorage
+    localStorage.setItem("taxRate", taxRate);
+    localStorage.setItem("shippingPrice", shippingPrice);
+    localStorage.setItem("shippingFreePrice", shippingFreePrice);
+  
+    //set items to sessionStorage
+    //  sessionStorage.setItem("taxRate", taxRate);
+    //  sessionStorage.setItem("shippingPrice", shippingPrice);
+    //  sessionStorage.setItem("shippingFreePrice", shippingFreePrice);
+  });
 
-    const buttonInc = Array.from(increase)
-    const buttonDec = Array.from(decrease)
 
 
-    sectionR.addEventListener("click", (e)=> {
+    sectionR.addEventListener("click", (event)=> {
 
-      
-        if(e.target.className == "decrease"){
-
-           
-             if(Number(e.target.nextElementSibling.textContent)>0){
-         let oranges1 = e.target.parentElement.previousElementSibling.children[1].children[0];
-        
-             e.target.nextElementSibling.textContent = (Number( e.target.nextElementSibling.textContent) - 1);
-             oranges1.textContent = "$" + (Number(e.target.nextElementSibling.textContent)*bag).toFixed(2);
-            //     subtotal.textContent = "$" + Number(oranges.textContent.slice(1));
-            //     total.textContent = "$" + ( Number(subtotal.textContent.slice(1)) + Number(shipping.textContent.slice(1))).toFixed(2);
-        
+        if(event.target.className == "fa-solid fa-minus"){
+       
+    
+             if(event.target.nextElementSibling.innerText > 1){
+                event.target.nextElementSibling.innerText--;
+                calculateProducts(event.target);
+                calculateTotal(event.target);
+                
+              
              }
-            // else{
-            //     product.remove();
-            // } 
-
+             else {
+                if(confirm("are you sure to delete!")){
+                event.target.parentElement.parentElement.parentElement.remove();
+                calculateTotal(event.target);
+            }
+             }
         }  
-        else if(e.target.className == "increase"){
-            // console.log("yess")
-                   e.target.previousElementSibling.textContent = (Number( e.target.previousElementSibling.textContent) + 1);
-                  let oranges1 = e.target.parentElement.previousElementSibling.children[1].children[0];
-                   oranges1.textContent = "$" + (Number(e.target.previousElementSibling.textContent)*bag).toFixed(2);
+
+        else if(event.target.className == "fa-solid fa-plus"){
+            
+            event.target.previousElementSibling.innerText++;
+            calculateProducts(event.target);
+            calculateTotal(event.target);
+        
+     
+
 
         }
-        else if(e.target.className == "remove"){
-            console.log("remove")
+
+
+        else if(event.target.className == "remove"){
+           event.target.parentElement.parentElement.remove();
+           calculateTotal(event.target);
      
         }
+
         else{
             console.log("others")
         }
 
     
     
-            // if(Number(buttonspan.textContent)>0){
-        
-            //     buttonspan.textContent = (Number(buttonspan.textContent) - 1);
-            //     oranges.textContent = "$" + (Number(buttonspan.textContent)*bag).toFixed(2);
-            //     subtotal.textContent = "$" + Number(oranges.textContent.slice(1));
-            //     total.textContent = "$" + ( Number(subtotal.textContent.slice(1)) + Number(shipping.textContent.slice(1))).toFixed(2);
-        
-            // }
-            // else{
-            //     product.remove();
-            // }    
-        })
-        
-    // increase.addEventListener("click", ()=> {
-    //         buttonspan.textContent = (Number(buttonspan.textContent) + 1);
-    //         oranges.textContent = "$" + (Number(buttonspan.textContent)*bag).toFixed(2);
-    //         subtotal.textContent = "$" + Number(oranges.textContent.slice(1));
-    //         total.textContent = "$" + ( Number(subtotal.textContent.slice(1)) + Number(shipping.textContent.slice(1))).toFixed(2);
-        
-        
-        
-    // })
+    });
+
+
+const calculateProducts = (clickedBtn)=> {
+const productDiv = clickedBtn.parentElement.parentElement;
+const priceCheap = productDiv.querySelector(".oranges").innerText;
+const quantity = productDiv.querySelector(".buttonspan").innerText;
+const productTotal = productDiv.querySelector(".producttotal");
+
+
+productTotal.innerText = (priceCheap * quantity).toFixed(2);
+
+
+
+
+};
+
+const calculateTotal = () =>{
+    const total = document.getElementById("total");
+    const subTotal = document.getElementById("subTotal");
+
+    const shipping = document.getElementById("shipping");
+    const tax = document.getElementById("tax");
+    const totalPrices = Array.from(document.getElementsByClassName("producttotal"));
+  
+    let subT = 0;
+    totalPrices.forEach(a=> {
+        subT += Number(a.innerText);
+    })
+    subTotal.innerText = subT;
+    const taxPrice = Number((subT * localStorage.getItem("taxRate"))).toFixed(2);
+
+    const shippingPrice = Number(subT > 0 && subT < localStorage.getItem("shippingFreePrice")? localStorage.getItem("shippingPrice"): 0);
+    tax.innerText = Number(taxPrice);
+    shipping.innerText = shippingPrice;
+    subTotal.innerText = subT;
     
-    
-        
-        
-
-
-
-
-
-
+    total.innerText = (Number(taxPrice) + shippingPrice+ subT).toFixed(2);
+};
 
