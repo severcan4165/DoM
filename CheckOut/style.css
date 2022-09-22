@@ -1,0 +1,211 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+@font-face {
+    font-family: Mon;
+    src: url('FONTS/Montserrat-Regular.ttf');
+}
+body{
+    width: 70%;
+    height: 100vh;
+    margin: auto;
+    font-family: Mon;
+ 
+
+}
+header{
+    width: 100%;
+    font-size: 1.5rem;
+    margin:1rem auto;
+    text-align: center;
+}
+main{
+    /* background-color: black; */
+    width: 100%;
+    display: flex;
+    justify-content: space;
+    align-items: flex-start;
+}
+/* formun dahil olduğu blok left */
+.left{
+    width: 65%;
+    padding-left: 3rem;
+}
+/* sağdaki resmin dahil olduğu blok right */
+
+.right{
+    position: relative;
+    left: -3rem;
+    padding: 0 1rem 0 1.5rem;
+    width: 35%;
+    border-radius: 0.5rem;
+    background-color: rgb(240, 240, 240)
+}
+
+/* formun içindeki 2 bölümün dahil olduğu blok başlangıcı */
+.left h2{
+    margin: 1rem 0;
+    font-size: 2rem;
+}
+.contact, .shipping-address{
+    padding-left: 1rem;
+    width:80% ;
+    font-size: 1.1rem;
+
+
+}
+
+/* 2 istisna hari. tüm input alanlarının style başlangıcı */
+
+.inputfield .inp{
+    width: 30rem;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    padding-left: 2.2rem;
+    margin: 0.5rem 0;
+}
+/* input alanındaki iconların stylı */
+
+.relative{
+    position: relative;
+    left:-29.3rem;
+    top:0.1rem;
+    color: gray;
+}
+
+/* formdaki 2istisnadan ilki country inputu */
+
+.inp2{
+    width: 9rem;
+    height: 2.2rem;
+    border-radius: 0.5rem;
+    padding-left: 2rem;
+}
+/* formdaki 2 istisnadan ilki country inputunun ikonu */
+
+.relative2{
+    position: relative;
+    left:-8.6rem;
+    top:0.1rem;
+    color:gray;
+
+}
+/* country ve postal code inputlarını yanyana yapmak için float left verdim */
+.countryfloat{
+    float: left;
+}
+/* formdaki 2 istisnadan ikincisi postalcode inputu */
+
+.inp3{
+    width: 19.5rem;
+    height: 2.2rem;
+    border-radius: 0.5rem;
+    padding-left: 3rem;
+}
+/* formdaki 2 istisnadan ikincisi postalcode inputunın ikonu */
+
+.relative3{
+    position: relative;
+    left:-18.6rem;
+    top:0.1rem;
+    color:gray;
+}
+
+/*checkbox start */
+.checkmargin{
+    margin:0.6rem 0;
+}
+.chcklabel{
+    margin-left: 0.6rem;
+}
+/* formun buttonu*/
+.formbutton{
+  position: relative;
+  left: 24.5rem;
+  width: 6rem;
+  height: 2rem;
+  border-radius: 0.4rem;
+  background-color: orange;
+}
+.formbutton:hover{
+    background-color: darkorange;
+    font-weight: 700;
+}
+
+/* resimlerin olduğu right bloğu başlıyor */
+
+.imgs{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+.imgs .image{
+    width: 40%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin:1rem 1rem 2rem 0;
+}
+.imgs .image img{
+    width: 100%;    
+    border-radius: 0.5rem;
+
+   
+}
+/* .imgs .info{
+
+
+} */
+.product{
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: -1.5rem 0 0.5rem 0;
+}
+.subinfo{
+    margin-bottom: 2rem;
+}
+.oranges{
+    color: orange;
+    font-size: 1.1rem;
+}
+.del{
+    margin-left: 1rem;
+    font-size: 1.1rem;
+    text-decoration:line-through;
+
+}
+.piecebutton{
+    border: 1px solid black;
+    width: fit-content;
+    padding: 0.6rem ;
+    border-radius: 0.5rem;
+
+}
+.piecebutton button{
+    width:1.5rem;
+    /* height: 1.6rem; */
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 0.2rem;
+    background-color: lightgray;
+    border-style: none;
+    border-radius: 0.3rem;
+    text-align: center;
+    
+}
+.buttonspan{
+    margin: 0 1rem;
+}
+
+.topborder{
+    border-top: 1px solid black;
+    font-size: 1.2rem;
+    padding-bottom: 1rem;
+}
+.spanright{
+    float: right;
+}
