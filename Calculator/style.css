@@ -1,0 +1,102 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+.container{
+    display: grid;
+    grid-template-columns: repeat(4, 3rem);
+    grid-template-rows: repeat(5, 3.4rem);
+    background-color:black ;
+    gap:0.6rem;
+    padding:1rem;
+    width: 16.5rem;
+    height: 30rem;
+    margin: 1rem auto;
+    border-radius: 1.3rem;
+}
+
+.content{
+    padding: 0.1rem;
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-top: 4rem;
+}
+.content:hover{
+    background-color: rgba(46, 44, 44, 0.673);
+}
+.content:active{
+transform: scale(0.95);}
+
+.islem:hover{
+    background-color: rgba(124, 97, 27, 0.922) ;
+}
+.islem:active{
+    transform: scale(0.95);
+}
+
+.screen{
+    height: 7rem;
+    background-color: rgb(170, 150, 150);
+    border:  2px groove red;
+    /* grid-area:5/1/5/3; */
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 1;
+    width: 14rem;
+
+   
+    
+    border-radius: 2rem;
+   }
+.result{
+    text-align: right;
+    margin-top: 1rem;
+    margin-right: 1rem;
+    font-size: 2rem;
+}
+.num{
+    background-color: gray;
+    color:white
+
+}
+.equal{
+    background-color: gray;
+    color:white
+
+}
+.islem{
+    background-color: goldenrod;
+    color: white;
+
+}
+.content1, .content2, .content3{
+    background-color: lightgray;
+    color: black;
+}
+.content1:hover, .content2:hover, .content3:hover{
+    background-color: rgba(127, 124, 124, 0.863);
+    color: black;
+    
+}
+.content1:active, .content2:active, .content3:active{
+    transform: scale(0.95);
+}
+.numspan{
+ /* grid-area:5/1/5/3; */
+ grid-column-start: 1;
+ grid-column-end: 3;
+ grid-row-start: 6;
+ grid-row-end: 6;
+ width: 6.7rem;
+ height: 3rem;
+ border-radius: 2rem;
+}

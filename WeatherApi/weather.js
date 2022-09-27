@@ -22,7 +22,8 @@ let city;
 let lat;
 let lon;
 
-// capturing events by click
+// capturing events by click, when user clicked to searchbutton, locationByName function is being called, 
+// and so, all the chain is being started
 searchBtn.addEventListener("click", ()=> {
     city = inputArea.value;
     locationByName(city);
