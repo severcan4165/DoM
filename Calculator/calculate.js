@@ -15,10 +15,11 @@
 const container = document.querySelector(".container");
 const result = document.querySelector(".result")
 let dizi = [];
+let operand = [];
 let sonuc = 0;
 let sonuc2;
 let sayilar = "";
-
+let flag =false;
 container.addEventListener("click", (e)=>{
     
     if(e.target.classList.contains("num")){  
@@ -31,7 +32,9 @@ container.addEventListener("click", (e)=>{
  
        
            if(e.target.id == "toplama") {
-                dizi.push(sayilar)
+                flag ? (dizi[0]=0):dizi.push(sayilar);
+                
+                operand.unshift("+");
                 sonuc = topla()
                 console.log(dizi,sonuc)
                 sayilar="";
@@ -39,23 +42,58 @@ container.addEventListener("click", (e)=>{
                
             }
             else if(e.target.id == "cikarma") {
-                dizi.push(sayilar)
-                sonuc = cikar()
-                console.log(dizi,sonuc)
-                result.innerHTML += " - "
-                sayilar ="";   
+                if(dizi.length<1){
+                    flag ? (dizi[0]=sonuc):dizi.push(sayilar);
+                 
+                    operand.unshift("-");
+                    sonuc = sayilar;
+                    result.innerHTML += " - "
+                    sayilar ="";
+                }
+                else{
+                    flag ? (dizi[0]=sonuc):dizi.push(sayilar);
+
+                
+                    operand.unshift("-");
+                    sonuc = cikar()
+                    result.innerHTML += " - "
+                    sayilar ="";
+                }
+                
             }            
             else if(e.target.id == "carpma"){
-                dizi.push(sayilar)
+                if(dizi.length<1){
+                    flag ? (dizi[0]=1):dizi.push(sayilar);
 
-                result.innerHTML += " x "
-                sayilar ="";   
+                    operand.unshift("x");
+                    sonuc = sayilar;
+                    result.innerHTML += " x "
+                    sayilar ="";
+                }
+                else{
+                    flag ? (dizi[0]=1):dizi.push(sayilar);
+
+                    operand.unshift("x");
+                    sonuc = carp()
+                    result.innerHTML += " x "
+                    sayilar ="";
+                } 
             } 
             else if(e.target.id == "bolme"){
-                dizi.push(sayilar)
-
-                result.innerHTML += " / "
-                sayilar ="";   
+                if(dizi.length<1){
+                    dizi.push(sayilar)
+                    operand.unshift("/");
+                    sonuc = sayilar;
+                    result.innerHTML += " / "
+                    sayilar ="";
+                }
+                else{
+                    dizi.push(sayilar)
+                    operand.unshift("/");
+                    sonuc = bol()
+                    result.innerHTML += " / "
+                    sayilar ="";
+                } 
             }     
             else if(e.target.id == "negatif"){
                 result.innerHTML = "-" + result.innerHTML;
@@ -63,23 +101,24 @@ container.addEventListener("click", (e)=>{
 
             }
     else if(e.target.classList.contains("equal")){
-            result.innerHTML = sonuc;
-                // dizi.push(sayilar);
-
-                // if(e.target.id == "toplama"){
-                //     topla(dizi);
-                // }
-                // else if(e.target.id == "cikarma"){
-                //     cikar(dizi);
-                // }
-                // else if(e.target.id == "carpma"){
-                //     carp(dizi);
-                // }
-                // else if(e.target.id == "bolme"){
-                //     bol(dizi);
-                // }
-              
-            console.log(dizi)
+           
+                dizi.push(sayilar);
+                switch(operand[0]){
+                    case "+": topla()
+                    break;
+                    case "-": cikar()
+                    break;
+                    case "x": carp()
+                    break;
+                    case "/": bol()
+                    break;
+                }
+           
+        result.innerHTML = sonuc;
+        dizi = [];
+        operand = [];
+        sayilar =sonuc;
+        flag =true;
     }
 
 })
@@ -91,11 +130,11 @@ function topla() {
         
   
   return sonuc;
-    // result.innerHTML = sonuc;
+
 }
 function cikar() {
     let i = dizi.length-1;
-    sonuc -=Number(dizi[i]);
+    sonuc -= Number(dizi[i]);
         
   
   return sonuc;
@@ -103,90 +142,26 @@ function cikar() {
 function carp() {
 
     let i = dizi.length-1;
-    sonuc = 1;
-    sonuc *=Number(dizi[i]);
-        
   
+    sonuc *= Number(dizi[i]);
+        
   return sonuc;
 }
 function bol() {
 
     let i = dizi.length-1;
-    sonuc = 1;
-    sonuc /=Number(dizi[i]);
+
+    sonuc /= Number(dizi[i]);
         
   
   return sonuc;
 }
   
   
-//   function cikar() {
-  
-//     let  sayi1 = document.getElementById("input1").value;
-//     let  sayi2 = document.getElementById("input2").value;
-  
-//       let sayi3 = parseFloat(sayi1) - parseFloat(sayi2);
-  
-//       document.getElementById("sonuc").innerHTML =
-  
-//       sayi3.toFixed(3);
-//   }
-  
-  
-//   function carp() {
-  
-//     let  sayi1 = document.getElementById("input1").value;
-//     let  sayi2 = document.getElementById("input2").value;
-  
-//       let sayi3 = parseFloat(sayi1) * parseFloat(sayi2);
-  
-//       document.getElementById("sonuc").innerHTML =
-  
-//       sayi3.toFixed(3);
-//   }
-  
-  
-//   function bol() {
-  
-//     let  sayi1 = document.getElementById("input1").value;
-//     let  sayi2 = document.getElementById("input2").value;
-  
-//       let sayi3 = parseFloat(sayi1) / parseFloat(sayi2);
-  
-//       document.getElementById("sonuc").innerHTML =
-  
-//       sayi3.toFixed(3);
-//   }
 
 
-
-
- 
-        // if(dizi.length<1){
-        //     switch (e.target) {
-        //         case toplama: dizi.push(result.innerHTML)
-        //                     result.innerHTML += " + "
-                 
-                    
-        //             break;
-        //         case cikarma: dizi.push(result.innerHTML)
-        //         result.innerHTML += " - "
-                    
-        //             break;
-        //         case carpma: dizi.push(result.innerHTML)
-        //         result.innerHTML += " x "
-                    
-        //             break;
-        //         case bolme:dizi.push(result.innerHTML) 
-        //         result.innerHTML += " / "
-                    
-        //             break;
-        //         case negatif: result.innerHTML = "-" +result.innerHTML
-                    
-        //             break;
-            
-        //         default:
-        //             break;
-        //     }
-
-        // }
+        
+// const container = document.querySelector(".container");
+// const previous = document.querySelector(".previous")
+// const operator = document.querySelector(".operator")
+// const current = document.querySelector(".current")
