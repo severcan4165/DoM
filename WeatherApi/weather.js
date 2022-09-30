@@ -66,17 +66,17 @@ const weatherByLatLon = (lat,lon) =>{
 // this block is for displaying result on the browser
 const renderLatLon = (data) =>{
     const {name, sys:{country}, main:{temp}, main:{temp_min}, main:{temp_max}, weather:[{description}], weather:[{icon}]} = data;
+    const iconUrlAWS = `https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/${icon}.svg`;
+    const icon1 = "http://openweathermap.org/img/wn/${icon}.png";
     let content = document.querySelector(".content");
-    content.innerHTML += `
+    content.innerHTML += `<div class="card">
    <div class="city">${name},${country}</div>
           <div class="temp">${Math.round(temp)}°C</div>
-          <img class="img" src="http://openweathermap.org/img/wn/${
-            icon
-          }.png" />
+          <img class="img" src="${iconUrlAWS}" />
           <div class="desc">${description}</div>
           <div class="minmax">${Math.round(temp_min)}°C/${Math.round(
       temp_max
-    )}°C</div>`;
+    )}°C</div><div>`;
 }
 
 window.onload =()=>{

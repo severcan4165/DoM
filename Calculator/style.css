@@ -92,10 +92,12 @@ transform: scale(0.95);}
 }
 .numspan{
  /* grid-area:5/1/5/3; */
- grid-column-start: 1;
+ 
+ /* grid-column-start: 1;
  grid-column-end: 3;
  grid-row-start: 6;
- grid-row-end: 6;
+ grid-row-end: 6; */
+ grid-column: span 2;
  width: 6.7rem;
  height: 3rem;
  border-radius: 2rem;

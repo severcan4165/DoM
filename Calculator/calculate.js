@@ -17,20 +17,21 @@ const result = document.querySelector(".result")
 let dizi = [];
 let operand = [];
 let sonuc = 0;
-let sonuc2;
+
 let sayilar = "";
 let flag =false;
 container.addEventListener("click", (e)=>{
-    
+//    console.log(e.target.id)
     if(e.target.classList.contains("num")){  
            
         result.innerHTML += e.target.innerText;
-        sayilar += e.target.innerText; 
+        sayilar +=e.target.textContent; 
+      
+
     }
     
     else if(e.target.classList.contains("islem")){
  
-       
            if(e.target.id == "toplama") {
                 flag ? (dizi[0]=0):dizi.push(sayilar);
                 
@@ -96,10 +97,30 @@ container.addEventListener("click", (e)=>{
                 } 
             }     
             else if(e.target.id == "negatif"){
-                result.innerHTML = "-" + result.innerHTML;
-            } 
+
+                result.innerHTML ="-" + result.innerHTML;
+                // console.log(typeof result.innerHTML)
+            }      
+            else if(e.target.id == "yuzde"){
+
+                result.innerHTML = parseFloat(sayilar/100);
+
+                // console.log(typeof result.innerHTML)
+            }      
+    
 
             }
+    else if(e.target.id == "del"){
+
+                result.innerHTML ="";
+                dizi = [];
+                operand = [];
+                sayilar ="";
+                sonuc=0;
+                flag =false;
+                // console.log(operand,sayilar,dizi, result.innerHTML)
+             
+    } 
     else if(e.target.classList.contains("equal")){
            
                 dizi.push(sayilar);

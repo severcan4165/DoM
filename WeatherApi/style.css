@@ -56,5 +56,22 @@
  }
 
  /* card */
-
- 
+.content{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+ .card{
+    margin-top:2rem ;
+    font-size: 1.2rem;
+    font-weight: 530;
+    border-radius: 0.6rem;
+    padding: 1rem 0;
+    background-color: white;
+    width: 8rem;
+    height: 16rem;
+    opacity: 0.6;
+ }
+ .img{
+    margin: 1rem 0;
+ }
