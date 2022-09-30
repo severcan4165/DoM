@@ -28,6 +28,8 @@ searchBtn.addEventListener("click", ()=> {
     city = inputArea.value;
     locationByName(city);
     inputArea.value = ""; 
+    inputArea.focus();
+
 })
 
 // capturing events by enter key
@@ -75,4 +77,8 @@ const renderLatLon = (data) =>{
           <div class="minmax">${Math.round(temp_min)}°C/${Math.round(
       temp_max
     )}°C</div>`;
+}
+
+window.onload =()=>{
+    inputArea.focus();
 }
